@@ -1,4 +1,5 @@
 import Image from "next/image";
+import Link from "next/link";
 
 export default function Home() {
   return (
@@ -37,6 +38,9 @@ export default function Home() {
         <div className="mx-auto max-w-6xl flex flex-col sm:flex-row items-center justify-between gap-4 px-6 py-8 text-sm text-gray">
           <span className="font-medium text-ocean-dark">Nadisoft</span>
           <div className="flex flex-col sm:flex-row items-center gap-4 sm:gap-8">
+            <Link href="/privacy-policy" className="transition-colors hover:text-ocean">
+              Privacy Policy
+            </Link>
             <a
               href="tel:+60174768369"
               className="transition-colors hover:text-ocean"
