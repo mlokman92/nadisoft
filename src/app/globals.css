@@ -1,27 +1,140 @@
 @import "tailwindcss";
 
+/* ─────────────────────────────────────────────────────────────
+   Nadisoft brand tokens — from the 2026–2030 corporate blueprint.
+   ───────────────────────────────────────────────────────────── */
 :root {
   --background: #ffffff;
-  --foreground: #1e293b;
-  --ocean: #0369a1;
-  --ocean-light: #7dd3fc;
-  --ocean-dark: #0c4a6e;
-  --gray: #64748b;
-  --gray-light: #f1f5f9;
+  --surface: #f4f6fa;
+  --surface-2: #eaeff6;
+  --foreground: #0f1b2d;
+  --muted: #56627a;
+  --border: #e4e8ef;
+
+  /* Brand palette */
+  --nadi-blue: #0066ff;
+  --nadi-blue-strong: #0052d6;
+  --azure: #3b8bff;
+  --sky: #9ec7ff;
+  --deep-navy: #0a1e3d;
+  --navy-700: #122a4f;
+  --navy-600: #1c3a68;
+  --steel-gray: #7a8699;
+  --soft-gray: #e6e8eb;
 }
 
 @theme inline {
   --color-background: var(--background);
+  --color-surface: var(--surface);
+  --color-surface-2: var(--surface-2);
   --color-foreground: var(--foreground);
-  --color-ocean: var(--ocean);
-  --color-ocean-light: var(--ocean-light);
-  --color-ocean-dark: var(--ocean-dark);
-  --color-gray: var(--gray);
-  --color-gray-light: var(--gray-light);
-  --font-sans: var(--font-geist-sans);
+  --color-muted: var(--muted);
+  --color-border: var(--border);
+
+  --color-nadi-blue: var(--nadi-blue);
+  --color-nadi-blue-strong: var(--nadi-blue-strong);
+  --color-azure: var(--azure);
+  --color-sky: var(--sky);
+  --color-deep-navy: var(--deep-navy);
+  --color-navy-700: var(--navy-700);
+  --color-navy-600: var(--navy-600);
+  --color-steel-gray: var(--steel-gray);
+  --color-soft-gray: var(--soft-gray);
+
+  --font-sans: var(--font-inter);
+  --font-display: var(--font-poppins);
+}
+
+/* ─── Base ─────────────────────────────────────────────────── */
+html {
+  scroll-behavior: smooth;
+  scroll-padding-top: 6rem;
+  -webkit-text-size-adjust: 100%;
 }
 
 body {
   background: var(--background);
   color: var(--foreground);
+  font-feature-settings: "cv11", "ss01";
+  text-rendering: optimizeLegibility;
+}
+
+h1,
+h2,
+h3,
+h4 {
+  font-family: var(--font-display);
+  letter-spacing: -0.02em;
+}
+
+::selection {
+  background: color-mix(in srgb, var(--nadi-blue) 22%, transparent);
+  color: var(--deep-navy);
+}
+
+:focus-visible {
+  outline: 2px solid var(--nadi-blue);
+  outline-offset: 2px;
+  border-radius: 4px;
+}
+
+/* ─── Helpers ──────────────────────────────────────────────── */
+.text-gradient {
+  background: linear-gradient(100deg, var(--sky) 0%, #ffffff 55%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+.text-gradient-blue {
+  background: linear-gradient(100deg, var(--nadi-blue) 0%, var(--azure) 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+/* Subtle dotted/grid texture for light sections */
+.bg-grid {
+  background-image: radial-gradient(
+    color-mix(in srgb, var(--deep-navy) 7%, transparent) 1px,
+    transparent 1px
+  );
+  background-size: 22px 22px;
+}
+
+/* ─── Motion ───────────────────────────────────────────────── */
+@keyframes fade-up {
+  from {
+    opacity: 0;
+    transform: translateY(16px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes spin-orbit {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.animate-fade-up {
+  animation: fade-up 0.7s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+.orbit-spin {
+  transform-origin: center;
+  animation: spin-orbit 60s linear infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  .animate-fade-up,
+  .orbit-spin {
+    animation: none;
+  }
 }
